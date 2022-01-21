@@ -7,45 +7,37 @@
 
 import SwiftUI
 
+extension VerticalAlignment {
+    enum MidAccountAndName: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[.top]
+        }
+    }
+    
+    static let midAccountAndName = VerticalAlignment(MidAccountAndName.self)
+}
+
 struct ContentView: View {
     var body: some View {
-//        Text("Live long and prosper")
-//            .frame(width: 300, height: 300, alignment: .topLeading)
-//            .offset(x: 50, y: 50)
-        
-//        HStack(alignment: .lastTextBaseline) {
-//            Text("Live")
-//                .font(.caption)
-//            Text("long")
-//            Text("and")
-//                .font(.title)
-//            Text("prosper")
-//                .font(.largeTitle)
-//        }
-        
-//        VStack(alignment: .leading) {
-//            Text("Hello, world!")
-////                .offset(x: -100)
-//                .alignmentGuide(.leading) { d in
-//                    d[.trailing]
-//                }
-//            Text("This is a longer line of text")
-//        }
-//        .background(.red)
-//        .frame(width: 400, height: 400)
-//        .background(.blue)
-        
-        VStack(alignment: .leading) {
-            ForEach(0..<10) { position in
-                Text("Number \(position)")
-                    .alignmentGuide(.leading) { _ in
-                        Double(position) * -10
+        HStack(alignment: .midAccountAndName) {
+            VStack {
+                Text("@dmitrysharabin")
+                    .alignmentGuide(.midAccountAndName) { d in
+                        d[VerticalAlignment.center]
                     }
+                Color.blue
+                    .frame(width: 64, height: 64)
+            }
+            
+            VStack {
+                Text("Full name:")
+                Text("Dmitry Sharabin")
+                    .alignmentGuide(.midAccountAndName, computeValue: { d in
+                        d[VerticalAlignment.center]
+                    })
+                    .font(.largeTitle)
             }
         }
-        .background(.red)
-        .frame(width: 400, height: 400)
-        .background(.blue)
     }
 }
 
