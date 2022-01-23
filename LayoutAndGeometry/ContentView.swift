@@ -20,6 +20,7 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity)
                             .background(colors[index % 7])
                             .rotation3DEffect(.degrees(geo.frame(in: .global).minY - fullView.size.height / 2) / 5, axis: (x: 0, y: 1, z: 0))
+                            .scaleEffect(max(0.5, (geo.frame(in: .global).maxY + fullView.size.height / 2.15) / fullView.size.height - 0.05))
                             .opacity(geo.frame(in: .global).minY <= 200 ? geo.frame(in: .global).minY / 200 - 0.1 : 1)
                     }
                     .frame(height: 40)
